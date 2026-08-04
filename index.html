@@ -30,7 +30,8 @@
 <meta property="og:title" content="OffThaYard Tattooz | Tattoos &amp; Piercings in Detroit">
 <meta property="og:description" content="Custom tattoos, black &amp; grey, portraits, fine line &amp; piercings in Detroit, MI. Simple designs, strong impact. Over 10 years of expertise.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0b'/%3E%3Cpath d='M16 5 18.6 12.4 26.5 12.6 20.2 17.4 22.5 24.9 16 20.4 9.5 24.9 11.8 17.4 5.5 12.6 13.4 12.4 Z' fill='%23cc2a1f'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Ops+One&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -374,6 +375,10 @@
   .gtile img{width:100%;height:100%;object-fit:cover;display:block}
   .gtile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 62%,rgba(10,10,11,.5));pointer-events:none}
   @media(max-width:640px){.gtile{height:176px;width:268px}.grow::before,.grow::after{width:40px}}
+  /* Logo badge */
+  .brand-badge{width:46px;height:46px;display:block;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.55))}
+  .foot-badge{width:88px;height:auto;display:block;margin-bottom:14px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.5))}
+  @media(max-width:640px){.brand-badge{width:40px;height:40px}}
 </style>
 </head>
 <body>
@@ -383,6 +388,7 @@
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="brand" aria-label="OffThaYard Tattooz">
+      <img class="brand-badge" src="logo.png" alt="" width="46" height="46">
       <span class="logo" style="font-size:15px">
         <span class="name">OffTha<span class="k">Yard</span></span>
         <span class="sub">Tattooz</span>
@@ -712,6 +718,7 @@
     <div class="foot-top">
       <div class="reveal" style="max-width:320px">
         <div style="margin-bottom:18px">
+          <img class="foot-badge" src="logo.png" alt="OffThaYard Tattooz logo" width="88">
           <span class="logo" style="font-size:17px">
             <span class="name">OffTha<span class="k">Yard</span></span>
             <span class="sub">Tattooz</span>
