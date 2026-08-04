@@ -337,9 +337,19 @@
   .price-legend{max-width:980px;margin:36px auto 0;text-align:center;color:var(--muted);font-size:.88rem}
   .price-legend b{color:var(--accent-2);font-weight:500}
   @media(max-width:760px){.price-cols{grid-template-columns:1fr;gap:34px}.price-col{gap:34px}}
+  /* Nav music toggle */
+  .nav-links{margin-left:auto}
+  .nav-music{display:inline-grid;place-items:center;width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.02);color:var(--ink);font-size:1.02rem;line-height:1;cursor:pointer;transition:border-color .2s,background .2s,transform .2s,box-shadow .2s;margin-left:16px}
+  .nav-music:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .nav-music.playing{border-color:var(--accent);animation:musicpulse 1.7s ease-in-out infinite}
+  @keyframes musicpulse{0%,100%{box-shadow:0 0 0 2px rgba(204,42,31,.18)}50%{box-shadow:0 0 0 6px rgba(204,42,31,.04)}}
+  @media(max-width:900px){.nav-music{margin-left:auto;margin-right:12px}}
 </style>
 </head>
 <body>
+<audio id="bgMusic" loop preload="none">
+  <source src="cut-me-on.m4a" type="audio/mp4">
+</audio>
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="brand" aria-label="OffThaYard Tattooz">
@@ -357,6 +367,7 @@
       <a href="https://www.instagram.com/offthayard" target="_blank" rel="noopener" class="nav-ig" aria-label="Instagram @offthayard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
       <a href="#book" class="btn btn-solid nav-cta">Book Now</a>
     </nav>
+    <button class="nav-music" id="musicToggle" type="button" aria-label="Play music" aria-pressed="false" title="Play music">🔇</button>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -893,6 +904,27 @@
     const rIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){initRev();rIO.disconnect();}}),{rootMargin:'300px 0px'});
     rIO.observe(rev);
   }
+
+  // Background music toggle (starts paused; browsers block autoplay-with-sound)
+  (function(){
+    var audio=document.getElementById('bgMusic');
+    var btn=document.getElementById('musicToggle');
+    if(!audio||!btn)return;
+    audio.volume=0.65;
+    function setOn(on){
+      btn.textContent = on ? '🔊' : '🔇';
+      btn.classList.toggle('playing', on);
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.title = on ? 'Pause music' : 'Play music';
+      btn.setAttribute('aria-label', on ? 'Pause music' : 'Play music');
+    }
+    btn.addEventListener('click',function(){
+      if(audio.paused){ audio.play().catch(function(){}); }
+      else{ audio.pause(); }
+    });
+    audio.addEventListener('play', function(){ setOn(true); });
+    audio.addEventListener('pause', function(){ setOn(false); });
+  })();
 </script>
 </body>
 </html>
