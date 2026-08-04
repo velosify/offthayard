@@ -108,7 +108,7 @@
   }
   .hero-bg::after{content:"";position:absolute;inset:0;opacity:.4;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Ccircle cx='30' cy='30' r='.7' fill='%23cc2a1f' fill-opacity='.22'/%3E%3C/svg%3E");}
-  .hero-content{position:relative;z-index:2;max-width:780px}
+  .hero-content{position:relative;z-index:3;max-width:780px}
   .rating-pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:50px;padding:7px 16px 7px 12px;margin-bottom:26px;background:rgba(255,255,255,.02)}
   .stars{color:var(--accent-2);letter-spacing:2px;font-size:.9rem}
   .rating-pill small{color:var(--muted);font-family:'Oswald';font-size:.78rem;letter-spacing:.06em}
@@ -355,6 +355,10 @@
   .scard-ico{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:130px;height:130px;color:var(--accent-2);opacity:.3;z-index:1;transition:opacity .4s ease}
   .scard:hover .scard-ico{opacity:.42}
   .scard.wide .scard-ico{top:50%}
+  /* Prison-bar overlay on the hero */
+  .hero-bars{position:absolute;inset:0;z-index:2;pointer-events:none;background:url('bars.png') center/cover no-repeat;opacity:.9;
+    -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.35) 0%,#000 34%,#000 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,.35) 0%,#000 34%,#000 100%)}
+  @media(max-width:640px){.hero-bars{opacity:.82;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,rgba(0,0,0,.25) 100%);mask-image:linear-gradient(180deg,#000 0%,#000 55%,rgba(0,0,0,.25) 100%)}}
 </style>
 </head>
 <body>
@@ -388,6 +392,7 @@
     <source src="hero.mp4?v=2" type="video/mp4">
   </video>
   <div class="hero-bg"></div>
+  <div class="hero-bars" aria-hidden="true"></div>
   <div class="wrap hero-content">
     <div class="rating-pill">
       <span class="stars">★★★★★</span>
