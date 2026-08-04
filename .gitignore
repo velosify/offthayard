@@ -1,0 +1,15 @@
+# OS / editor junk
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Local scratch (not for deploy)
+_to_delete/
