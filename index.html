@@ -390,6 +390,15 @@
   .hero-badge{width:clamp(300px,62vw,680px);height:auto;display:block;filter:drop-shadow(0 16px 52px rgba(0,0,0,.72))}
   .hero-logo-only .hero-cta{justify-content:center}
   @media(max-width:640px){.hero-badge{width:clamp(285px,90vw,450px)}}
+  /* Google rating badge + map embed */
+  .g-rating{display:inline-flex;align-items:center;gap:16px;margin-top:24px;padding:12px 26px;border:1px solid var(--line);border-radius:50px;background:rgba(255,255,255,.02)}
+  .g-rating b{font-family:'Bebas Neue';font-size:2.7rem;line-height:.9;color:var(--accent-2)}
+  .g-rating-r{text-align:left}
+  .g-rating .stars{color:var(--accent-2);letter-spacing:2px;font-size:1rem}
+  .g-rating small{display:block;font-family:'Oswald';text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--muted);margin-top:3px}
+  .map-embed{margin-top:36px;border-radius:10px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);line-height:0}
+  .map-embed iframe{width:100%;height:360px;display:block;filter:grayscale(.2) contrast(1.04)}
+  @media(max-width:640px){.map-embed iframe{height:280px}}
 </style>
 </head>
 <body>
@@ -608,7 +617,11 @@
     <div class="sec-head center reveal">
       <p class="eyebrow">Word on the Street</p>
       <h2>What Clients <span class="accent">Say</span></h2>
-      <p>Real 5-star reviews from our clients — straight from our Google page.</p>
+      <p>Real reviews from our clients — straight from our Google page.</p>
+      <div class="g-rating reveal">
+        <b>4.9</b>
+        <div class="g-rating-r"><span class="stars">★★★★★</span><small>Based on 183 Google reviews</small></div>
+      </div>
     </div>
     <div class="revmarquee reveal">
       <div class="revrow" data-dir="rtl">
@@ -681,7 +694,7 @@
       </div>
     </div>
     <div class="reveal" style="text-align:center;margin-top:32px">
-      <a href="https://www.google.com/maps/search/?api=1&query=19730%20Ralston%20St%20%23105%2C%20Detroit%2C%20MI%2048203" target="_blank" rel="noopener" class="btn btn-ghost">Read all on Google</a>
+      <a href="https://maps.app.goo.gl/UBJPSVorBR78wWew8" target="_blank" rel="noopener" class="btn btn-ghost">Read all 183 on Google</a>
     </div>
   </div>
 </section>
@@ -714,6 +727,9 @@
           </table>
         </div>
       </div>
+    </div>
+    <div class="map-embed reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188371.6023608693!2d-83.39135636967157!3d42.46377408935444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824cf45f18f9227%3A0x3e2c9a1281cbbe2a!2sOffThaYard%20Tattooz%20%26%20Piercings!5e0!3m2!1sen!2sus!4v1785880224912!5m2!1sen!2sus" width="600" height="450" style="border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="OffThaYard Tattooz on Google Maps"></iframe>
     </div>
   </div>
 </section>
