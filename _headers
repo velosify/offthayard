@@ -1,12 +1,12 @@
 # Cloudflare Pages headers — https://developers.cloudflare.com/pages/configuration/headers/
 
-# Cache the static media (kept short-ish while we're still iterating on files)
+# Cache media briefly while iterating (bump ?v=N on a file's URL to force an instant refresh)
 /*.mp4
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=3600
 /*.m4a
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=3600
 /*.jpg
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=3600
 
 # Sensible security headers for the whole site
 /*
