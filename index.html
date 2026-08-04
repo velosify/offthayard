@@ -149,8 +149,8 @@
   .grid{display:grid;gap:22px}
   .services{grid-template-columns:repeat(2,1fr)}
   .scard{position:relative;aspect-ratio:16/10;border-radius:8px;overflow:hidden;border:1px solid var(--line);display:flex;align-items:flex-end;box-shadow:var(--shadow)}
-  .scard .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(1) contrast(1.05) brightness(.72);transition:filter .5s ease,transform .6s ease;z-index:0}
-  .scard:hover .bg{filter:grayscale(0) contrast(1.02) brightness(.9);transform:scale(1.06)}
+  .scard .bg{position:absolute;inset:0;z-index:0;background:#141417;transition:transform .6s ease,filter .5s ease}
+  .scard:hover .bg{transform:scale(1.05);filter:brightness(1.12)}
   .scard::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.1) 35%,rgba(10,10,11,.86));pointer-events:none}
   .scard::before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;z-index:2;background:linear-gradient(90deg,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
   .scard:hover::before{transform:scaleX(1)}
@@ -164,9 +164,7 @@
   .stat span{font-family:'Oswald';text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;color:var(--muted)}
   /* Gallery */
   #gallery{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0a0a0b}
-  #gallery::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-    background-image:linear-gradient(180deg,rgba(10,10,11,.9),rgba(10,10,11,.8) 45%,rgba(10,10,11,.92)),url('hedge.jpg');
-    background-size:auto,cover;background-repeat:no-repeat;background-position:center}
+  #gallery::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(1000px 620px at 50% -5%,rgba(204,42,31,.16),transparent 60%),linear-gradient(180deg,#0d0d10,#0a0a0b 50%,#0d0d10)}
   #gallery .wrap{position:relative;z-index:1}
   .gallery{grid-template-columns:repeat(4,1fr);gap:16px}
   .tile{aspect-ratio:1;border-radius:6px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);display:block;background:#111114}
@@ -349,6 +347,14 @@
   .ig-panel .ig-ic{width:52px;height:52px;color:var(--accent-2);margin:0 auto 18px;display:block}
   .ig-panel h3{font-size:2rem;letter-spacing:.03em;margin-bottom:12px}
   .ig-panel p{color:var(--muted);font-size:1.05rem;max-width:460px;margin:0 auto}
+  /* Branded service-card backgrounds (no photos) */
+  .scard .bg1{background:radial-gradient(130% 100% at 12% 15%,rgba(236,59,45,.34),transparent 55%),linear-gradient(140deg,#1c1c22,#0d0d10)}
+  .scard .bg2{background:radial-gradient(130% 100% at 88% 22%,rgba(204,42,31,.30),transparent 55%),linear-gradient(140deg,#191a1f,#0c0c0f)}
+  .scard .bg3{background:radial-gradient(90% 150% at 50% 118%,rgba(204,42,31,.34),transparent 55%),linear-gradient(120deg,#1a151a,#0e0e11 55%,#171015)}
+  .scard .bg::before{content:"";position:absolute;inset:0;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='.7' fill='%23cc2a1f' fill-opacity='.22'/%3E%3C/svg%3E")}
+  .scard-ico{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);width:130px;height:130px;color:var(--accent-2);opacity:.3;z-index:1;transition:opacity .4s ease}
+  .scard:hover .scard-ico{opacity:.42}
+  .scard.wide .scard-ico{top:50%}
 </style>
 </head>
 <body>
@@ -421,15 +427,15 @@
     </div>
     <div class="grid services">
       <div class="scard reveal">
-        <div class="bg" style="background-image:url('work1-poster.jpg')"></div>
+        <div class="bg bg1"><svg class="scard-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M16 5 18.6 12.4 26.5 12.6 20.2 17.4 22.5 24.9 16 20.4 9.5 24.9 11.8 17.4 5.5 12.6 13.4 12.4 Z"/></svg></div>
         <h3>Custom Tattoos</h3>
       </div>
       <div class="scard reveal">
-        <div class="bg" style="background-image:url('fineline.jpg')"></div>
+        <div class="bg bg2"><svg class="scard-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M3 16 C 8 8, 12 24, 16 16 S 24 8, 29 16"/></svg></div>
         <h3>Fine Line &amp; Minimalist</h3>
       </div>
       <div class="scard wide reveal">
-        <div class="bg" style="background-image:url('work3-poster.jpg')"></div>
+        <div class="bg bg3"><svg class="scard-ico" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="16" cy="12" r="6.5"/><path d="M5.5 28 C 6 20.5, 10.5 18, 16 18 C 21.5 18, 26 20.5, 26.5 28"/></svg></div>
         <h3>Black &amp; Grey · Portraits</h3>
       </div>
     </div>
