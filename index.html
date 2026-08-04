@@ -359,6 +359,21 @@
   .hero-bars{position:absolute;inset:0;z-index:2;pointer-events:none;background:url('bars.png?v=3') center/cover no-repeat;opacity:.9;
     -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.35) 0%,#000 34%,#000 100%);mask-image:linear-gradient(90deg,rgba(0,0,0,.35) 0%,#000 34%,#000 100%)}
   @media(max-width:640px){.hero-bars{opacity:.9;-webkit-mask-image:none;mask-image:none}}
+  /* Trademark disclaimer */
+  .tm-note{max-width:640px;margin:30px auto 0;text-align:center;font-size:.74rem;line-height:1.55;color:var(--muted);letter-spacing:.01em}
+  /* Photo gallery marquee */
+  .gmarquee{display:flex;flex-direction:column;gap:16px}
+  .grow{overflow:hidden;position:relative}
+  .grow::before,.grow::after{content:"";position:absolute;top:0;bottom:0;width:70px;z-index:3;pointer-events:none}
+  .grow::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+  .grow::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+  .gtrack{display:flex;gap:16px;width:max-content;will-change:transform;animation:reelscroll var(--dur,60s) linear infinite}
+  .grow[data-dir="ltr"] .gtrack{animation-direction:reverse}
+  .gmarquee:hover .gtrack{animation-play-state:paused}
+  .gtile{flex:0 0 auto;height:232px;width:354px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#111114;position:relative;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  .gtile img{width:100%;height:100%;object-fit:cover;display:block}
+  .gtile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,0) 62%,rgba(10,10,11,.5));pointer-events:none}
+  @media(max-width:640px){.gtile{height:176px;width:268px}.grow::before,.grow::after{width:40px}}
 </style>
 </head>
 <body>
@@ -521,12 +536,26 @@
     <div class="sec-head center reveal">
       <p class="eyebrow">The Portfolio</p>
       <h2>Recent <span class="accent">Work</span></h2>
-      <p>Our portfolio is always growing — the freshest tattoos and piercings land on our Instagram first.</p>
+      <p>A look at recent work out of the shop — cover-ups, lettering, portraits, piercings, and more.</p>
     </div>
-    <div class="ig-panel reveal">
-      <svg class="ig-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-      <h3>See Our Latest Work on Instagram</h3>
-      <p>Fresh tattoos and piercings posted regularly. Follow along, and slide into the DMs to book your session.</p>
+    <div class="gmarquee reveal">
+      <div class="grow" data-dir="rtl">
+        <div class="gtrack">
+          <figure class="gtile"><img src="g1.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g2.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g3.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g4.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g5.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
+      <div class="grow" data-dir="ltr">
+        <div class="gtrack">
+          <figure class="gtile"><img src="g6.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g7.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g8.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+          <figure class="gtile"><img src="g9.jpg" alt="OffThaYard Tattooz work" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
     </div>
     <div class="ig-cta reveal">
       <a href="https://www.instagram.com/offthayard" target="_blank" rel="noopener" class="btn btn-solid">
@@ -568,6 +597,7 @@
       </div>
       <p class="ink-done">Not bad… but maybe leave the D to <span class="accent">the pros</span>. <a href="tel:+13136990345" target="_blank" rel="noopener">Book the real thing →</a></p>
     </div>
+    <p class="tm-note reveal">The Old English &ldquo;D&rdquo; is a registered trademark of the Detroit Tigers and Major League Baseball. Shown here for entertainment purposes only. OffThaYard Tattooz is not affiliated with, endorsed by, or sponsored by the Detroit Tigers or Major League Baseball.</p>
   </div>
 </section>
 
@@ -883,6 +913,24 @@
   }
 
   // Review marquee: two rows scrolling opposite ways (pause on hover to read)
+  // Photo gallery marquee: two rows, opposite directions, seamless loop
+  const gmq=document.querySelector('.gmarquee');
+  if(gmq){
+    let gmStarted=false;
+    const initGmq=()=>{
+      if(gmStarted)return; gmStarted=true;
+      const SPEED=55; // px/s
+      gmq.querySelectorAll('.gtrack').forEach(track=>{
+        const row=track.parentElement, base=track.innerHTML; let g=0;
+        while(track.scrollWidth < row.clientWidth && g++<40){ track.insertAdjacentHTML('beforeend', base); }
+        const setW=track.scrollWidth;
+        track.insertAdjacentHTML('beforeend', track.innerHTML); // duplicate -> two identical halves
+        track.style.setProperty('--dur',(setW/SPEED)+'s');
+      });
+    };
+    const gmIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){initGmq();gmIO.disconnect();}}),{rootMargin:'300px 0px'});
+    gmIO.observe(gmq);
+  }
   const rev=document.querySelector('.revmarquee');
   if(rev){
     let rStarted=false;
